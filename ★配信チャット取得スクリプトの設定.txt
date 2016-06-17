@@ -1,0 +1,79 @@
+﻿★★★全体設定
+
+◆自分のチャットの部屋
+[chat]:#simoyaka
+
+◇チャット本文の色
+[color]:黒
+　（対応色）
+　　無 黒 赤 黄緑 青緑 水色 緑 青 白 紫 茶 橙 黄 桃 薄灰 濃灰
+　　太字は色の後に太字と書いてください
+　　例）赤色で太字の場合は「赤太字」
+
+◇名前欄の括弧の種類　デフォルトでは半角括弧表示されます
+[kakko]:1
+0：括弧無　匿名
+1：半角括弧　(匿名)
+2：全角括弧　（匿名）
+3：半角大括弧　[匿名]
+4：半角コロン　匿名:
+5：全角コロン　匿名：
+
+★★★<youtube>　GetYoutubeLiveCommentとの連携
+
+◆youtubeのURL//https://www.youtube.com/watch?v=Lngfl2nfon0の形
+[Yurl]:https://www.youtube.com/watch?v=Lngfl2nfon0
+
+◇youtubeの名前欄の色（対応色は本文と同じ）
+[Ycolor]:赤
+
+◇読み取り感覚（1000で1秒に1回、300で0.3秒に一回）
+[Yinterval]:1000
+
+◇名前表記（ありorなし）
+[Ytokumei]:あり
+
+◇名前表記なしの場合の表記
+[Yname]:Youtube
+
+◇その場合、Youtube(27)の数字を消すか（消すor消さない）
+[Ynumber]:消さない
+
+◇棒読みちゃんを使うか(使うor使わない)
+[Ybouyomichan]:使わない
+
+◇棒読みちゃんで発言者の名前を読み上げるかどうか(読むor読まない)
+[YbouyomiNick]:読まない
+
+
+★★★<FC2>…FC2生米との連携
+
+◆FC2log.txtの場所（変更必須）
+[Flog]:C:\Users\owner1\Desktop\etc\FC2come0-5-1-0\FC2log.txt
+
+◇FC2の名前欄の色（対応色は本文と同じ）
+[Fcolor]:青
+
+◇読み取り感覚（1000で1秒に1回、300で0.3秒に一回）
+[Finterval]:300
+
+◇匿名(27)の数字を消すか（消すor消さない）
+[Fnumber]:消さない
+
+★★★<ニコ生>　…NiconamaCommentViewerとの連携（Flashコメントジェネレーター経由）
+
+◆FcgFileファイルの場所（変更必須）
+[Nlog]:C:\Users\owner1\AppData\Roaming\posite-c\NiconamaCommentViewer\NicoLiveComment.dat
+
+◇ニコニコの名前欄（ニコ生(27)のニコ生の数字じゃない部分）
+[Nname]:ニコ生
+
+◇ニコニコの名前欄の色（対応色は本文と同じ）
+[Ncolor]:緑
+
+◇読み取り感覚（1000で1秒に1回、300で0.3秒に一回）
+[Ninterval]:300
+
+◇ニコ生(27)の数字を消すか（消すor消さない）
+[Nnumber]:消さない
+

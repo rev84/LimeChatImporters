@@ -1,0 +1,5 @@
+# ignore all
+chat.log
+
+# allow any
+!*.exe
