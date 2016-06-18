@@ -4,14 +4,14 @@ FC2、ニコ生、YoutubeLiveのチャットの内容を、LimeChatに流せる�
 
 # 動作環境
 
-Windows版のLimeChatが動作する環境。  
+Windows版の[LimeChat](http://limechat.net/)が動作する環境。  
 Windows7(64bit)でのみ動作確認済み。
 
 # 使い方
 
 1. ダウンロード後のファイルを、LimeChatのスクリプトフォルダに展開。  
-1. 「★配信チャット取得スクリプトの設定.txt」の内容をうまく設定する。    
     - （ただし「.gitignore」「README.md」「LICENSE.BSD」はなくてよい）
+1. 「★配信チャット取得スクリプトの設定.txt」の内容をうまく設定する。    
 1. LimeChatのメニュー「設定」→「スクリプトの設定」を選択、「xニコ生.js」「xYoutube.js」「xFC2.js」の好きなものを好きなだけ◯入れる。  
 
 # ソイソース醤油からの注意
