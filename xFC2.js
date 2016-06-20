@@ -110,19 +110,19 @@ function datload() {
           for(a=0;a<ss.length;a++){
               if (ss[a] == '') continue;
               sss[a] = ss[a].split("\"");
-              for(i=0;i<sss[a].length;i++){
+              for(i=0;i<sss[a].length-1;i++){
                 if(sss[a][i]=="username")  datname[a]=sss[a][i+2];
                 if(sss[a][i]=="comment")	  dattext[a]=sss[a][i+2];
               }
           }
           var ii=0;
-          for(i=0;i<ss.length;i++){
+          for(i=0;i<ss.length-1;i++){
             if(ss[i]==beme) ii=i+1;
           }
-          for(i=ii;i<ss.length;i++){
+          for(i=ii;i<ss.length-1;i++){
             writelime(datname[i],dattext[i]);
           }
-          beme=ss[ss.length-1];
+          beme=ss[ss.length-2];
         be_dat=s;
 }
 function writelime(datname,dattext){
