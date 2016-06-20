@@ -36,9 +36,6 @@ Windows7(64bit)でのみ動作確認済み。
 
 # 連携に用いる他のソフトウェア
 
-- Fc2生米
-   - http://fc2list.web.fc2.com/fc2kome/index.html
-
 - NiconamaCommentViewer
    - http://www.posite-c.com/application/ncv/
 

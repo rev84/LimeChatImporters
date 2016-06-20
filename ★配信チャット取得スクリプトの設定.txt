@@ -19,7 +19,14 @@
 4：半角コロン　匿名:
 5：全角コロン　匿名：
 
-★★★<youtube>　GetYoutubeLiveCommentとの連携
+
+◇棒読みちゃんを使うか(使うor使わない)
+[bouyomichan]:使う
+
+◇棒読みちゃんで発言者の名前を読み上げるかどうか(読むor読まない)
+[bouyomiNick]:読む
+
+★★★<youtube>
 
 ◆youtubeのURL//https://www.youtube.com/watch?v=Lngfl2nfon0の形
 [Yurl]:https://www.youtube.com/watch?v=Lngfl2nfon0
@@ -39,17 +46,10 @@
 ◇その場合、Youtube(27)の数字を消すか（消すor消さない）
 [Ynumber]:消さない
 
-◇棒読みちゃんを使うか(使うor使わない)
-[Ybouyomichan]:使わない
+★★★<FC2>
 
-◇棒読みちゃんで発言者の名前を読み上げるかどうか(読むor読まない)
-[YbouyomiNick]:読まない
-
-
-★★★<FC2>…FC2生米との連携
-
-◆FC2log.txtの場所（変更必須）
-[Flog]:C:\Users\owner1\Desktop\etc\FC2come0-5-1-0\FC2log.txt
+◇取得プログラムの種類（Revin製orソイソ製）
+[Fwhich]:ソイソ製
 
 ◇FC2の名前欄の色（対応色は本文と同じ）
 [Fcolor]:青
