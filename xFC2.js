@@ -26,7 +26,7 @@ function event::onLoad(){
   }
 }
 function loadconfig(){
-        var file = openFile(userScriptPath+"\\★配信チャット取得スクリプトの設定.txt",true);
+        var file = openFile(userScriptPath+"\\xSetting.txt",true);
         if (file) {
           var s = file.readALL();
           file.close();
@@ -78,7 +78,8 @@ function loadconfig(){
          datloadF() ;
        }
 }
-var beme;var datpath=userScriptPath+ "\\FC2\\FC2.log"
+var beme;
+var datpath=userScriptPath+ "\\FC2\\FC2.log";
 function datloadF() {
         var file = openFile(datpath,true);
         if (file) {
@@ -89,7 +90,8 @@ function datloadF() {
           var ss = new Array;
           ss.length = 0;
           ss = s.split("\n");
-          beme=ss[ss.length-2];
+          beme=ss[ss.length-1];
+          log("FC2最新取得："+beme);
         }
         var dat=setInterval(datload,interval);
 }
@@ -110,19 +112,19 @@ function datload() {
           for(a=0;a<ss.length;a++){
               if (ss[a] == '') continue;
               sss[a] = ss[a].split("\"");
-              for(i=0;i<sss[a].length-1;i++){
+              for(i=0;i<sss[a].length;i++){
                 if(sss[a][i]=="username")  datname[a]=sss[a][i+2];
                 if(sss[a][i]=="comment")	  dattext[a]=sss[a][i+2];
               }
           }
           var ii=0;
-          for(i=0;i<ss.length-1;i++){
+          for(i=0;i<ss.length;i++){
             if(ss[i]==beme) ii=i+1;
           }
-          for(i=ii;i<ss.length-1;i++){
+          for(i=ii;i<ss.length;i++){
             writelime(datname[i],dattext[i]);
           }
-          beme=ss[ss.length-2];
+          beme=ss[ss.length-1];
         be_dat=s;
 }
 function writelime(datname,dattext){

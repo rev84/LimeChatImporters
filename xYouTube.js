@@ -30,7 +30,7 @@ var Yfile = userScriptPath + "\\youtube\\";
 datpath = Yfile + "chat.log";
 
 function loadconfig(){
-        var file = openFile(userScriptPath+"\\★配信チャット取得スクリプトの設定.txt",true);
+        var file = openFile(userScriptPath+"\\xSetting.txt",true);
         if (file) {
           var s = file.readALL();
           file.close();
@@ -38,7 +38,7 @@ function loadconfig(){
         if(s){
           var ss = new Array;
           ss.length = 0;
-          ss = s.split("\r\n");
+          ss = s.split("\n");
           for(a=0;a<ss.length-1;a++){
            if(ss[a].match(/\[chat\]\:/)) mychan=RegExp.rightContext;
            if(ss[a].match(/\[kakko\]\:/)) kakko=RegExp.rightContext;
@@ -83,7 +83,7 @@ function loadconfig(){
           file.close();
         }
         shellOpen(Yfile+"youtube.bat","");
-         datloadF();
+        datloadF();
        }
 }
 
@@ -105,6 +105,7 @@ function datloadF() {
           }
           beme=ss[ss.length-2];
         }
+        log("YouTube最終取得"+beme);
         var dat=setInterval(datload,interval);
 }
 function datload() {
