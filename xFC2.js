@@ -111,32 +111,35 @@ function datload() {
           var dattext = new Array;
           for(a=0;a<ss.length;a++){
               if (ss[a] == '') continue;
-              sss[a] = ss[a].split("\"");
-              for(i=0;i<sss[a].length;i++){
-                if(sss[a][i]=="username")  datname[a]=sss[a][i+2];
-                if(sss[a][i]=="comment")	  dattext[a]=sss[a][i+2];
-              }
+              sss[a] = ss[a].split("\t");
           }
           var ii=0;
           for(i=0;i<ss.length;i++){
             if(ss[i]==beme) ii=i+1;
           }
           for(i=ii;i<ss.length;i++){
-            writelime(datname[i],dattext[i]);
+            writelime(sss[i][0],sss[i][1]);
+            if(sss[i][2] != ""){
+              playSound('tip.wav');
+            }
           }
           beme=ss[ss.length-1];
         be_dat=s;
 }
 function writelime(datname,dattext){
-        if(number){
-          if(datname.match(/匿名 \((\d+)?\)/)){
-            datname="匿名";
-          }
-        }
-        datname=fc2s[0]+datname+fc2s[1];
-        var channelObject = findChannel(mychan);
-        channelObject.print (name_color+datname+''+textspace+text_color+dattext+'');
-        if(bouyomichan) talkChat(datname, dattext);
+         if (datname === undefined || dattext === undefined) {
+         }
+         else{
+           if(number){
+             if(datname.match(/匿名 \((\d+)?\)/)){
+               datname="匿名";
+             }
+           }
+           datname=fc2s[0]+datname+fc2s[1];
+           var channelObject = findChannel(mychan);
+           channelObject.print (name_color+datname+''+textspace+text_color+dattext+'');
+           if(bouyomichan) talkChat(datname, dattext);
+         }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

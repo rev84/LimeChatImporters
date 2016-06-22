@@ -1,4 +1,8 @@
-﻿Module FC2_soysource
+﻿Imports System.Text
+Imports Newtonsoft.Json
+
+
+Module FC2_soysource
 
     Sub Main()
         'ListenするIPアドレス
@@ -96,36 +100,42 @@
             'NetworkStreamを取得
             Dim ns As System.Net.Sockets.NetworkStream = client.GetStream()
             'クライアントから送られたデータを受信する
+            Dim resMsg As String = ""
             Do
                 'データの一部を受信する
                 resSize = ns.Read(resBytes, 0, resBytes.Length)
 
-                'Readが0を返した時はクライアントが切断したと判断
                 If resSize <> 0 Then
                     '受信したデータを蓄積する
                     Dim ms As New System.IO.MemoryStream()
                     ms.Write(resBytes, 0, resSize)
                     '受信したデータを文字列に変換
-                    Dim resMsg As String = enc.GetString(ms.GetBuffer(), 0, CInt(ms.Length))
+                    resMsg += enc.GetString(ms.GetBuffer(), 0, CInt(ms.Length))
                     ms.Close()
-                    Console.WriteLine(resMsg)
+                    Debug.WriteLine(resMsg)
+                    If (resMsg.IndexOf("username") > 0) Then
+                        Dim jsonObj As Object = JsonConvert.DeserializeObject(resMsg)
+                        Dim v As String = jsonObj("username") + vbTab + jsonObj("comment") + vbTab + jsonObj("tip_username")
+                        resMsg = ""
+                        chatMsg.Enqueue(v)
+                        Console.WriteLine(v)
+                        If (chatMsg.Count > 500) Then
+                            chatMsg.Dequeue()
+                        End If
 
-                    chatMsg.Enqueue(resMsg)
-                    If (chatMsg.Count > 500) Then
-                        chatMsg.Dequeue()
+                        Try
+                            Dim sw As New System.IO.StreamWriter("FC2.log", False)
+                            sw.Write(String.Join(vbLf, chatMsg))
+                            sw.Close()
+                        Catch ex As System.IO.IOException
+                            System.Console.WriteLine(ex.Message)
+                        Catch ex As System.UnauthorizedAccessException
+                            System.Console.WriteLine(ex.Message)
+                        Catch ex As System.Exception
+                            '例外の説明を表示する
+                            System.Console.WriteLine(ex.Message)
+                        End Try
                     End If
-                    Try
-                        Dim sw As New System.IO.StreamWriter("FC2.log", False)
-                        sw.Write(String.Join("\n", chatMsg))
-                        sw.Close()
-                    Catch ex As System.IO.IOException
-                        System.Console.WriteLine(ex.Message)
-                    Catch ex As System.UnauthorizedAccessException
-                        System.Console.WriteLine(ex.Message)
-                    Catch ex As System.Exception
-                        '例外の説明を表示する
-                        System.Console.WriteLine(ex.Message)
-                    End Try
                 End If
             Loop
 
@@ -142,5 +152,7 @@
         End Try
 
     End Sub
+
+
 
 End Module
