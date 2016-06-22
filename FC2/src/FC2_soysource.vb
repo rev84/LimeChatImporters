@@ -113,7 +113,7 @@ Module FC2_soysource
                     resMsg += enc.GetString(ms.GetBuffer(), 0, CInt(ms.Length))
                     ms.Close()
                     Debug.WriteLine(resMsg)
-                    If (resMsg.IndexOf("username") > 0) Then
+                    Try
                         Dim jsonObj As Object = JsonConvert.DeserializeObject(resMsg)
                         Dim v As String = jsonObj("username") + vbTab + jsonObj("comment") + vbTab + jsonObj("tip_username")
                         resMsg = ""
@@ -135,7 +135,8 @@ Module FC2_soysource
                             '例外の説明を表示する
                             System.Console.WriteLine(ex.Message)
                         End Try
-                    End If
+                    Catch
+                    End Try
                 End If
             Loop
 
