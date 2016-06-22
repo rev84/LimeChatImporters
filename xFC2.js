@@ -18,12 +18,7 @@ function event::onLoad(){
 	loadconfig();
 	oShell = new ActiveXObject("Wscript.Shell");
 	oWmi   = GetObject("winmgmts:\\\\.\\root\\cimv2"); 
-  if (which == 'Revin製') {
-    shellOpen(userScriptPath+ "\\FC2\\FC2_revin.exe","");
-  }
-  else {
     shellOpen(userScriptPath+ "\\FC2\\FC2_soysource.exe","");
-  }
 }
 function loadconfig(){
         var file = openFile(userScriptPath+"\\xSetting.txt",true);

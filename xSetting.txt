@@ -64,9 +64,6 @@ S4U：https://www.youtube.com/watch?v=Lngfl2nfon0
 ◇匿名(27)の数字を消すか（消すor消さない）
 [Fnumber]:消さない
 
-◇取得プログラムの種類（Revin製orソイソ製）
-[Fwhich]:ソイソ製
-
 ★★★<ニコ生>…nicoフォルダ内のNCVoutput.dllをNCVのpluginフォルダに入れる
 
 ◇ニコニコの名前欄（ニコ生(27)のニコ生の数字じゃない部分）
