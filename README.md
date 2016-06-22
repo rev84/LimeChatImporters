@@ -11,7 +11,7 @@ Windows7(64bit)でのみ動作確認済み。
 
 1. ダウンロード後のファイルを、LimeChatのスクリプトフォルダに展開。  
     - （ただし「.gitignore」「README.md」「LICENSE.BSD」はなくてよい）
-1. 「★配信チャット取得スクリプトの設定.txt」の内容をうまく設定する。    
+1. 「Setting.txt」の内容をうまく設定する。    
 1. LimeChatのメニュー「設定」→「スクリプトの設定」を選択、「xニコ生.js」「xYoutube.js」「xFC2.js」の好きなものを好きなだけ◯入れる。  
 
 # ソイソース醤油からの注意
@@ -38,9 +38,6 @@ Windows7(64bit)でのみ動作確認済み。
 
 - NiconamaCommentViewer
    - http://www.posite-c.com/application/ncv/
-
-- Flashコメントジェネレーター
-   - http://seesaawiki.jp/fcg/
 
 - 棒読みちゃん
    - http://chi.usamimi.info/Program/Application/BouyomiChan/
