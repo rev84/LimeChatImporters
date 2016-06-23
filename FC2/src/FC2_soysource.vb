@@ -5,6 +5,8 @@ Imports Newtonsoft.Json
 Module FC2_soysource
 
     Sub Main()
+
+
         'ListenするIPアドレス
         Dim ipString As String = "127.0.0.1"
         Dim ipAdd As System.Net.IPAddress = System.Net.IPAddress.Parse(ipString)
@@ -100,7 +102,7 @@ Module FC2_soysource
             'NetworkStreamを取得
             Dim ns As System.Net.Sockets.NetworkStream = client.GetStream()
             'クライアントから送られたデータを受信する
-            Dim resMsg As String = ""
+            Dim resMsg As String = "{""items"":["
             Do
                 'データの一部を受信する
                 resSize = ns.Read(resBytes, 0, resBytes.Length)
@@ -112,30 +114,36 @@ Module FC2_soysource
                     '受信したデータを文字列に変換
                     resMsg += enc.GetString(ms.GetBuffer(), 0, CInt(ms.Length))
                     ms.Close()
-                    Debug.WriteLine(resMsg)
+                    Console.WriteLine(resMsg)
+                    resMsg = resMsg.Replace("}{", "},{")
                     Try
-                        Dim jsonObj As Object = JsonConvert.DeserializeObject(resMsg)
-                        Dim v As String = jsonObj("username") + vbTab + jsonObj("comment") + vbTab + jsonObj("tip_username")
-                        resMsg = ""
-                        chatMsg.Enqueue(v)
-                        Console.WriteLine(v)
-                        If (chatMsg.Count > 500) Then
-                            chatMsg.Dequeue()
-                        End If
-
+                        Dim jsonObj As Object = JsonConvert.DeserializeObject(resMsg + "]}")
+                        Dim i As Integer = 0
+                        While True
+                            If jsonObj.SelectToken("items[" & i & "].username") Is Nothing Then
+                                Exit While
+                            End If
+                            Dim username As String = jsonObj.SelectToken("items[" & i & "].username")
+                            Dim comment As String = jsonObj.SelectToken("items[" & i & "].comment")
+                            Dim tip_username As String = jsonObj.SelectToken("items[" & i & "].tip_username")
+                            Dim v As String = username + vbTab + comment + vbTab + tip_username
+                            i = i + 1
+                            chatMsg.Enqueue(v)
+                            Console.WriteLine(v)
+                            If (chatMsg.Count > 500) Then
+                                chatMsg.Dequeue()
+                            End If
+                        End While
                         Try
                             Dim sw As New System.IO.StreamWriter("FC2.log", False)
                             sw.Write(String.Join(vbLf, chatMsg))
                             sw.Close()
-                        Catch ex As System.IO.IOException
-                            System.Console.WriteLine(ex.Message)
-                        Catch ex As System.UnauthorizedAccessException
-                            System.Console.WriteLine(ex.Message)
-                        Catch ex As System.Exception
-                            '例外の説明を表示する
-                            System.Console.WriteLine(ex.Message)
+                        Catch
+                            Console.WriteLine("書き込み失敗")
                         End Try
+                        resMsg = "{""items"":["
                     Catch
+                        Console.WriteLine("Json変換失敗")
                     End Try
                 End If
             Loop
