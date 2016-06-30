@@ -51,10 +51,10 @@ public class Fc2Getter
             bool isContainTip = dic.ContainsKey("tip_username");
             commentNo++;
             if (isContainTip) {
-                resMsg = commentNo.ToString() + "\t" + dic["username"].Replace("\t", " ") + "\t" + dic["comment"].Replace("\t", " ") + "\t" + "1";
+                resMsg = commentNo.ToString() + "\t" + dic["time"].Replace("\t", " ") + "\t" + dic["username"].Replace("\t", " ") + "\t" + dic["comment"].Replace("\t", " ") + "\t" + "1";
             }
             else {
-                resMsg = commentNo.ToString() + "\t" + dic["username"].Replace("\t", " ") + "\t" + dic["comment"].Replace("\t", " ") + "\t" + "0";
+                resMsg = commentNo.ToString() + "\t" + dic["time"].Replace("\t", " ") + "\t" + dic["username"].Replace("\t", " ") + "\t" + dic["comment"].Replace("\t", " ") + "\t" + "0";
             }
             ms.Close();
             messages.Enqueue(resMsg);

@@ -94,6 +94,7 @@ function datloadF() {
           log("FC2最新取得："+beme);
         }
         if (which.match(/Revin製/)) {
+          initRevin();
           var dat=setInterval(datloadRevin,interval);
         }
         else {
@@ -102,6 +103,27 @@ function datloadF() {
 }
 
 var revinCommentNo = 0;
+function initRevin() {
+  var nowTime = +new Date();
+  var file = openFile(datpath,true);
+  if (!file) {
+    return;
+  }
+  var buf = file.readAll();
+  file.close();
+  var fileArray = buf.replace(/[\r\n|\r]/g,"\n").split("\n");
+  for (var index = 0; index < fileArray.length; index++) {
+    var line = fileArray[index];
+    if (line == '') continue;
+    var lineArray = line.split("\t");
+    var commentNo   = parseInt(lineArray[0]);
+    var time        = parseInt(lineArray[1]);
+    // 5秒前の発言の最新IDを探る
+    if (time <= nowTime - 5*1000) {
+      revinCommentNo = commentNo;
+    }
+  }
+}
 function datloadRevin() {
   var file = openFile(datpath,true);
   if (!file) {
@@ -115,9 +137,10 @@ function datloadRevin() {
     if (line == '') continue;
     var lineArray = line.split("\t");
     var commentNo   = parseInt(lineArray[0]);
-    var name        = lineArray[1];
-    var commentBody = lineArray[2];
-    var isChip      = lineArray[3] == 1;
+    var time        = parseInt(lineArray[1]);
+    var name        = lineArray[2];
+    var commentBody = lineArray[3];
+    var isChip      = lineArray[4] == 1;
     if (revinCommentNo < commentNo) {
       revinCommentNo = commentNo;
       writelime(name, commentBody);
