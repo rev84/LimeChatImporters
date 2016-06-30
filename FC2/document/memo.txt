@@ -1,0 +1,3 @@
+// コンパイルコマンド
+
+F:\Dropbox\git\LimeChatImporters\FC2\src>C:\Windows\Microsoft.NET\Framework\v4.0.30319\csc.exe /reference:F:\Dropbox\git\LimeChatImporters\FC2\Newtonsoft.Json.dll F:\Dropbox\git\LimeChatImporters\FC2\src\FC2_revin.cs
