@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 public class Fc2Getter
 {
@@ -30,6 +31,7 @@ public class Fc2Getter
 
         System.Text.Encoding enc = System.Text.Encoding.UTF8;
         
+        int commentNo = 0;
         Queue<string> messages = new Queue<string>(510);
 
         while (ns.CanRead) {
@@ -45,15 +47,27 @@ public class Fc2Getter
 
             string resMsg = enc.GetString(ms.GetBuffer(), 0, (int)ms.Length);
             resMsg = resMsg.TrimEnd('\n');
-
+            Dictionary<string, string> dic = JsonConvert.DeserializeObject<Dictionary<string, string>>(resMsg);
+            bool isContainTip = dic.ContainsKey("tip_username");
+            commentNo++;
+            if (isContainTip) {
+                resMsg = commentNo.ToString() + "\t" + dic["username"].Replace("\t", " ") + "\t" + dic["comment"].Replace("\t", " ") + "\t" + "1";
+            }
+            else {
+                resMsg = commentNo.ToString() + "\t" + dic["username"].Replace("\t", " ") + "\t" + dic["comment"].Replace("\t", " ") + "\t" + "0";
+            }
             ms.Close();
             messages.Enqueue(resMsg);
             if (messages.Count > 500) {
                 messages.Dequeue();
             }
-            System.IO.StreamWriter sw = new System.IO.StreamWriter(@"FC2.log", false, System.Text.Encoding.GetEncoding("utf-8"));
-            sw.Write(string.Join("\n", messages.ToArray()));
-            sw.Close();
+            try {
+                System.IO.StreamWriter sw = new System.IO.StreamWriter(@"FC2.log", false, System.Text.Encoding.GetEncoding("utf-8"));
+                sw.Write(string.Join("\n", messages.ToArray()));
+                sw.Close();
+            } catch (Exception e) {
+                Console.WriteLine("System.IO.StreamWriter: "+e.ToString());
+            }
             Console.WriteLine("{0}", resMsg);
         }
     }

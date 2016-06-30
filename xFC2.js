@@ -18,7 +18,12 @@ function event::onLoad(){
 	loadconfig();
 	oShell = new ActiveXObject("Wscript.Shell");
 	oWmi   = GetObject("winmgmts:\\\\.\\root\\cimv2"); 
+  if (which.match(/Revin製/)) {
+    shellOpen(userScriptPath+ "\\FC2\\FC2_revin.exe","");
+  }
+  else {
     shellOpen(userScriptPath+ "\\FC2\\FC2_soysource.exe","");
+  }
 }
 function loadconfig(){
         var file = openFile(userScriptPath+"\\xSetting.txt",true);
@@ -29,7 +34,7 @@ function loadconfig(){
         if(s){
           var ss = new Array;
           ss.length = 0;
-          ss = s.split("\n");
+          ss = s.replace(/[\r\n|\r]/g,"\n").split("\n");
           for(a=0;a<ss.length-1;a++){
            if(ss[a].match(/\[chat\]\:/)) mychan=RegExp.rightContext;
            if(ss[a].match(/\[kakko\]\:/)) kakko=RegExp.rightContext;
@@ -88,7 +93,36 @@ function datloadF() {
           beme=ss[ss.length-1];
           log("FC2最新取得："+beme);
         }
-        var dat=setInterval(datload,interval);
+        if (which.match(/Revin製/)) {
+          var dat=setInterval(datloadRevin,interval);
+        }
+        else {
+          var dat=setInterval(datload,interval);
+        }
+}
+
+var revinCommentNo = 0;
+function datloadRevin() {
+  var file = openFile(datpath,true);
+  if (!file) {
+    return;
+  }
+  var buf = file.readAll();
+  file.close();
+  var fileArray = buf.replace(/[\r\n|\r]/g,"\n").split("\n");
+  for (var index = 0; index < fileArray.length; index++) {
+    var line = fileArray[index];
+    if (line == '') continue;
+    var lineArray = line.split("\t");
+    var commentNo   = parseInt(lineArray[0]);
+    var name        = lineArray[1];
+    var commentBody = lineArray[2];
+    var isChip      = lineArray[3] == 1;
+    if (revinCommentNo < commentNo) {
+      revinCommentNo = commentNo;
+      writelime(name, commentBody);
+    }
+  }
 }
 
 function datload() {

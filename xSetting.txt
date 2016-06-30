@@ -55,6 +55,9 @@ S4U：https://www.youtube.com/watch?v=Lngfl2nfon0
 
 ★★★<FC2>
 
+◇FC2読み取りプログラムの選択（ソイソース製 or Revin製）
+[Fwhich]:Revin製
+
 ◇FC2の名前欄の色（対応色は本文と同じ）
 [Fcolor]:青
 
