@@ -38,17 +38,17 @@ function loadconfig(){
         if(s){
           var ss = new Array;
           ss.length = 0;
-          ss = s.split("\n");
+          ss = s.replace(/[\r\n|\r]/g,"\n").split("\n");
           for(a=0;a<ss.length-1;a++){
            if(ss[a].match(/\[chat\]\:/)) mychan=RegExp.rightContext;
            if(ss[a].match(/\[kakko\]\:/)) kakko=RegExp.rightContext;
            if(ss[a].match(/\[Ycolor\]\:/)) name_color=RegExp.rightContext;
            if(ss[a].match(/\[color\]\:/)) text_color=RegExp.rightContext;
-           if(ss[a].match(/\[Ybouyomichan\]\:/)){
+           if(ss[a].match(/\[bouyomichan\]\:/)){
              if(RegExp.rightContext=="使う") bouyomichan=true;
              else bouyomichan=false;
            }
-           if(ss[a].match(/\[YbouyomiNick\]\:/)){
+           if(ss[a].match(/\[bouyomiNick\]\:/)){
               if(RegExp.rightContext=="読む") bNick=true;
               else bNick=false;
            }
@@ -117,7 +117,7 @@ function datload() {
         if(s){
           var ss = new Array;
           ss.length = 0;
-          ss = s.split("\n");
+          ss = s.replace(/[\r\n|\r]/g,"\n").split("\n");
           var sss = new Array;
           sss.length=0;
           for(a=0;a<ss.length-1;a++){
