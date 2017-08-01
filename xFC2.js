@@ -138,7 +138,7 @@ function datloadRevin() {
     var lineArray = line.split("\t");
     var commentNo   = parseInt(lineArray[0]);
     var time        = parseInt(lineArray[1]);
-    var name        = lineArray[2];
+    var name        = deleteTag(lineArray[2]);
     var commentBody = lineArray[3];
     var isChip      = lineArray[4] == 1;
     if (revinCommentNo < commentNo) {
@@ -183,10 +183,11 @@ function writelime(datname,dattext){
          }
          else{
            if(number){
-             if(datname.match(/匿名 \((\d+)?\)/)){
+             if(datname.match(/匿名\((\d+)?\)/)){
                datname="匿名";
              }
-           }else{
+           }
+           else {
              var temp = datname.match(/\((\d+)?\)/);
              datname = "匿名 " + temp[0];
            }
@@ -195,6 +196,10 @@ function writelime(datname,dattext){
            channelObject.print (name_color+datname+''+textspace+text_color+dattext+'');
            if(bouyomichan) talkChat(datname, dattext);
          }
+}
+
+function deleteTag(str) {
+  return str.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
