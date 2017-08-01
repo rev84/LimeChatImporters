@@ -186,6 +186,9 @@ function writelime(datname,dattext){
              if(datname.match(/匿名 \((\d+)?\)/)){
                datname="匿名";
              }
+           }else{
+             var temp = datname.match(/\((\d+)?\)/);
+             datname = "匿名 " + temp[0];
            }
            datname=fc2s[0]+datname+fc2s[1];
            var channelObject = findChannel(mychan);
