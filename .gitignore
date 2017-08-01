@@ -3,3 +3,5 @@ chat.log
 
 # allow any
 !*.exe
+FC2/document/compile.bat
+FC2/test.txt
